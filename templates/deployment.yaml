@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "emho-helm.fullname" . }}
+  name: {{ include "miniapi-helm.fullname" . }}
   labels:
-    {{- include "emho-helm.labels" . | nindent 4 }}
+    {{- include "miniapi-helm.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "emho-helm.selectorLabels" . | nindent 6 }}
+      {{- include "miniapi-helm.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "emho-helm.selectorLabels" . | nindent 8 }}
+        {{- include "miniapi-helm.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "emho-helm.serviceAccountName" . }}
+      serviceAccountName: {{ include "miniapi-helm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:

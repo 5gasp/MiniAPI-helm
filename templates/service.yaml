@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "emho-helm.fullname" . }}
+  name: {{ include "miniapi-helm.fullname" . }}
   labels:
-    {{- include "emho-helm.labels" . | nindent 4 }}
+    {{- include "miniapi-helm.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -13,4 +13,4 @@ spec:
       protocol: TCP
       name: {{ .Values.service.name }}
   selector:
-    {{- include "emho-helm.selectorLabels" . | nindent 4 }}
+    {{- include "miniapi-helm.selectorLabels" . | nindent 4 }}
