@@ -1,14 +1,14 @@
 # 5gasp-helm
 
-Helm charts for 5GASP Netapp-7
+Helm chart for 5GASP Netapp-7's MiniAPI
 
-**Purpose:** These helm charts will deploy and instantiate MEC Handover prediction application
+**Purpose:** This helm chart will deploy and instantiate the MiniAPI pod connected to the MEC Handover prediction application, for testing purposes.
 
 
 Note
 ====
 
-After the first (probably failed) implementation as a KNF (from the OSM machine):
+After the first (possibly failed) implementation as a KNF (from the OSM machine):
 
 1. Login to your private docker registry, on your K8s cluster master node, at [harbor.patras5g.eu/5gasp_private/]
 
@@ -30,84 +30,7 @@ The App will serve on
     <kubernetes_node_IP_address> (and <instantiation node address>):30101
 
 
-It has two APIs:
+The APIs are accessible via port 31001, and they are as follows:
 
-`GET <IP_address>:30101/` This API is to check the liveliness of the application-
-
-*Expected Output*: `<200 OK> EMHO NetApp`
-
+[Provide some descriptions on functionality]
   
-
-`POST <IP_address>:30101/mondata` This API consumes the radio monitoring data and return the mobile handover prediction probabilities
-*Expected Output*: `Handover Probabilities and Time To Handover`
-
-E.g.
-
-
-
-    $ curl --location --request POST '10.68.107.102:30101/mondata' \
-    
-    --header 'Content-Type: application/json' \
-    
-    --data-raw '{
-    
-    "Time": {
-    
-    "0": 1735868776,
-    
-    "1": 1735868777
-    
-    },
-    
-    "RSRP-241": {
-    
-    "0": -83,
-    
-    "1": -81
-    
-    },
-    
-    "RSRP-341": {
-    
-    "0": -130,
-    
-    "1": -130
-    
-    },
-    
-    "RSRP-119": {
-    
-    "0": -120,
-    
-    "1": -120
-    
-    },
-    
-    "lat": {
-    
-    "0": 51.449481,
-    
-    "1": 51.4495
-    
-    },
-    
-    "lng": {
-    
-    "0": -2.601033,
-    
-    "1": -2.601006
-    
-    },
-    
-    "S-PCI": {
-    
-    "0": 241,
-    
-    "1": 241
-    
-    }
-    
-    }'
-Expected Output:
-
-    {'PCI-241': 0.9753108, 'PCI-341': 0.01637554, 'PCI-119': 0.008313667, 'TTH': 25.5}

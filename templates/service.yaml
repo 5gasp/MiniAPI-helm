@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "miniapi-helm.fullname" . }}
+  name: {{ include "mini-api-helm.fullname" . }}
   labels:
-    {{- include "miniapi-helm.labels" . | nindent 4 }}
+    {{- include "mini-api-helm.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -13,4 +13,4 @@ spec:
       protocol: TCP
       name: {{ .Values.service.name }}
   selector:
-    {{- include "miniapi-helm.selectorLabels" . | nindent 4 }}
+    {{- include "mini-api-helm.selectorLabels" . | nindent 4 }}
